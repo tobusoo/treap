@@ -18,11 +18,12 @@ time2 = data2[:, 1]
 fig, ax = plt.subplots(1, 1)
 fig.set_size_inches(11, 7)
 
-ax.set(xlabel="N", ylabel="Time")
+ax.set(xlabel="Количество элементов в словаре", ylabel="Время поиска элемента, с")
 ax.grid(True, 'major', 'y')
-ax.plot(n, time, label='Treap')
-ax.plot(n2, time2, label='RTreap')
+ax.plot(n, time, label='Treap worst case')
+ax.plot(n2, time2, label='Treap average case')
 ax.legend(loc='center right')
 
-plt.savefig('out.png', dpi=600)
-plt.show()
+out_path = 'out.png'
+plt.savefig(out_path, dpi=600)
+print(f'Saved to {out_path}')

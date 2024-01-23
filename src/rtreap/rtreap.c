@@ -3,13 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <random>
-
 #include "rtreap.h"
-
-std::random_device rd;
-std::default_random_engine re(rd());
-std::uniform_int_distribution<int> uniform_dist(0, INT32_MAX);
 
 static RTreap* rtreap_alloc(int x)
 {
@@ -19,7 +13,7 @@ static RTreap* rtreap_alloc(int x)
     }
 
     node->x = x;
-    node->y = uniform_dist(re);
+    node->y = rand();
     node->left = NULL;
     node->right = NULL;
 

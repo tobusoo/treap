@@ -30,10 +30,6 @@ Treap* treap_create(int x, int y)
     return treap;
 }
 
-Treap* treap_build(int* x, int* y, size_t n)
-{
-}
-
 Treap* treap_lookup(Treap* treap, int x)
 {
     while (treap) {
