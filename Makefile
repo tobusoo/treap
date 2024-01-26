@@ -10,9 +10,10 @@ treap_vs_bstree: src/treap/treap.c src/treap/treap.h src/bstree/bstree.c src/bst
 	gcc -Wall -o treap_vs_bstree src/treap_vs_bstree.c src/treap/treap.c src/bstree/bstree.c
 
 clean: 
-	rm -rf avg worst
+	rm -rf avg worst treap_vs_bstree
 
 run: all
 	./worst 
 	./avg
-	cd plots; python3 main.py; cd ..
+	./treap_vs_bstree
+	cd plots; python3 main.py; python3 plot2.py; cd ..
