@@ -6,12 +6,14 @@ typedef struct Treap {
 
     int x;
     int y;
+
+    char* value;
 } Treap;
 
-Treap* treap_create(int x, int y);
-Treap* treap_add(Treap* treap, int x, int y);
-Treap* treap_lookup(Treap* treap, int x);
-Treap* treap_remove(Treap* treap, int x);
-void treap_split(Treap* treap, int x, Treap** left, Treap** right);
+Treap* treap_create(int key, const char* value);
+Treap* treap_add(Treap* root, int key, const char* value);
+Treap* treap_lookup(Treap* root, int key);
+Treap* treap_remove(Treap* root, int key);
+void treap_split(Treap* treap, int key, Treap** left, Treap** right);
 void treap_merge(Treap* treap1, Treap* treap2, Treap** treap);
 void treap_free(Treap* root);

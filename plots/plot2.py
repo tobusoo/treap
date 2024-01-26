@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-data_str = "output_1.data"
-data_str2 = "output_2.data"
+data_str = "output_3.data"
+data_str2 = "output_4.data"
 print(data_str)
 print(data_str2)
 
@@ -22,9 +22,9 @@ ax.set(xlabel="Количество элементов в словаре",
        ylabel="Время поиска элемента, с")
 ax.grid(True, 'major', 'y')
 ax.plot(n, time, label='Treap worst case')
-ax.plot(n2, time2, label='Treap average case')
+ax.plot(n2, time2, label='Bstree worst case')
 ax.legend(loc='center right')
 
-out_path = 'out.svg'
+out_path = 'out2.svg'
 plt.savefig(out_path, dpi=600)
 print(f'Saved to {out_path}')

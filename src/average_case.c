@@ -1,12 +1,12 @@
 #include <assert.h>
-#include <fstream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
+#include <time.h>
 
-#include "rtreap/rtreap.h"
+#include "treap/treap.h"
 
-#define N 200'000
+#define N 200000
 
 double wtime()
 {
@@ -18,8 +18,8 @@ double wtime()
 int main()
 {
     srand(time(0));
-    RTreap* rtreap = rtreap_create(rand());
-    std::ofstream file2("plots/output_2.data");
+    Treap* rtreap = treap_create(rand(), "value");
+    FILE* file = fopen("plots/output_2.data", "w");
 
     int* arr = (int*)malloc(sizeof(int) * N);
     assert(arr);
@@ -28,21 +28,22 @@ int main()
     }
 
     for (size_t i = 2; i <= N; ++i) {
-        rtreap = rtreap_add(rtreap, arr[i]);
+        rtreap = treap_add(rtreap, arr[i], "value");
         if (i % 20000 == 0) {
             const int iter = 1000000;
             double time2 = wtime();
             for (int j = 0; j < iter; ++j) {
                 int random = arr[rand() % i];
-                rtreap_lookup(rtreap, random);
+                treap_lookup(rtreap, random);
             }
             time2 = wtime() - time2;
             printf("%ld rtreap: %.10lf\n", i, (double)time2 / iter);
-            file2 << i << ' ' << (double)time2 / iter << '\n';
+            fprintf(file, "%ld %.10lf\n", i, (double)time2 / iter);
         }
     }
 
-    rtreap_free(rtreap);
+    treap_free(rtreap);
+    fclose(file);
 
     return 0;
 }

@@ -1,10 +1,12 @@
 #include <assert.h>
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "treap.h"
 
-static Treap* treap_alloc(int x, int y)
+static Treap* treap_alloc(int x, const char* value)
 {
     Treap* node = (Treap*)malloc(sizeof(Treap));
     if (!node) {
@@ -12,16 +14,18 @@ static Treap* treap_alloc(int x, int y)
     }
 
     node->x = x;
-    node->y = y;
+    node->y = rand();
+    node->value = strdup(value);
     node->left = NULL;
     node->right = NULL;
 
+    assert(node->value);
     return node;
 }
 
-Treap* treap_create(int x, int y)
+Treap* treap_create(int x, const char* value)
 {
-    Treap* treap = treap_alloc(x, y);
+    Treap* treap = treap_alloc(x, value);
     if (!treap) {
         fprintf(stderr, "Could not alloc memory for Treap\n");
         return NULL;
@@ -76,11 +80,11 @@ void treap_merge(Treap* treap1, Treap* treap2, Treap** treap)
     }
 }
 
-Treap* treap_add(Treap* treap, int x, int y)
+Treap* treap_add(Treap* treap, int x, const char* value)
 {
     assert(treap);
     Treap *t1, *t2;
-    Treap* node = treap_alloc(x, y);
+    Treap* node = treap_alloc(x, value);
     assert(node);
 
     treap_split(treap, node->x, &t1, &t2);
@@ -112,6 +116,8 @@ Treap* treap_remove(Treap* treap, int x)
     treap_merge(node->left, node->right, &t1);
 
     if (parent == NULL) {
+        free(node->value);
+        free(node);
         return t1;
     }
 
@@ -121,6 +127,9 @@ Treap* treap_remove(Treap* treap, int x)
         parent->right = t1;
     }
 
+    free(node->value);
+    free(node);
+
     return treap;
 }
 
@@ -129,6 +138,7 @@ void treap_free(Treap* root)
     if (root) {
         treap_free(root->left);
         treap_free(root->right);
+        free(root->value);
         free(root);
     }
 }
