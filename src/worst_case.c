@@ -35,7 +35,7 @@ int main()
                 treap_lookup(rtreap, random);
             }
             time2 = wtime() - time2;
-            printf("%ld rtreap: %.10lf\n", i, (double)time2 / iter);
+            printf("%ld treap: %.10lf\n", i, (double)time2 / iter);
             fprintf(file, "%ld %.10lf\n", i, (double)time2 / iter);
         }
     }

@@ -46,7 +46,7 @@ int main()
                 bstree_lookup(bstree, random);
             }
             time_bstree = wtime() - time_bstree;
-            printf("%ld rtreap: %.10lf; bstree: %.10lf\n",
+            printf("%ld treap: %.10lf; bstree: %.10lf\n",
                    i,
                    (double)time2 / iter,
                    (double)time_bstree / iter);
